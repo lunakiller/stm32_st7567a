@@ -14,6 +14,8 @@ Right now the library supports 4-wire SPI only.
     - vertical line (fast)
 - variable-width fonts
 - power-save procedure
+- example project
+    - build with Makefile or STM32CubeIDE
 
 ## How-to
 - include the correct HAL header for your MCU
