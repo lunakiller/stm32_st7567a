@@ -28,7 +28,7 @@ The library supports variable-width fonts. Two free pixel fonts are included:
 - [RetroVille NC](https://www.dafont.com/retroville-nc.font) (9px)
 - [videotype](https://www.dafont.com/videotype.font) (18px)
 
-More fonts can be generated using BMFont and slightly patched `bmfont2c.py` script by [Lars Ole Pontoppidan](https://larsee.com/blog/2014/05/converting-fonts-to-c-source-using-bmfont2c/). Instructions to come!
+More fonts can be generated using BMFont and slightly patched `bmfont2c.py` script by [Lars Ole Pontoppidan](https://larsee.com/blog/2014/05/converting-fonts-to-c-source-using-bmfont2c/). Instructions can be found in [fonts/README.md](fonts/README.md).
 
 ## to-do
 - [ ] Partial screen refresh
