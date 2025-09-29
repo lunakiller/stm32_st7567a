@@ -56,6 +56,8 @@ void st7567a_DrawHLine(uint8_t y, ST7567A_PixelState_t state);
 void st7567a_SetCursor(uint8_t x, uint8_t y);
 void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state);
 void st7567a_WriteString(const char *str, fontStyle_t font, ST7567A_PixelState_t state);
+void st7567a_WriteChar_FixedWidth(char ch, fontStyle_t font, uint8_t fixed_width, ST7567A_PixelState_t state);
+void st7567a_WriteString_FixedWidth(const char *str, fontStyle_t font, uint8_t fixed_width, ST7567A_PixelState_t state);
 
 void st7567a_SetContrast(uint8_t val);
 void st7567a_PowerSave(bool enable);

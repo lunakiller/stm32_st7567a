@@ -176,6 +176,11 @@ void st7567a_SetCursor(uint8_t x, uint8_t y) {
 }
 
 void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state) {
+	st7567a_WriteChar_FixedWidth(ch, font, 0, state);
+}
+
+// fixed_width = 0 -> variable-width
+void st7567a_WriteChar_FixedWidth(char ch, fontStyle_t font, uint8_t fixed_width, ST7567A_PixelState_t state) {
 	// check if char is available in the font
 	if(ch < font.FirstAsciiCode) {
 		ch = 0;
@@ -184,8 +189,17 @@ void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state) {
 		ch -= font.FirstAsciiCode;
 	}
 
+	// variable-width/fixed-width
+	uint8_t g_width;
+	if(fixed_width == 0) {
+		g_width = font.GlyphWidth[(int)ch];
+	}
+	else {
+		g_width = fixed_width;
+	}
+
 	// check remaining space on the current line
-	if (ST7567A_WIDTH < (ST7567A.curr_x + font.GlyphWidth[(int)ch]) ||
+	if (ST7567A_WIDTH < (ST7567A.curr_x + g_width) ||
 		ST7567A_HEIGHT < (ST7567A.curr_y + font.GlyphHeight)) {
 		// not enough space
 		return;
@@ -194,7 +208,7 @@ void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state) {
 	uint32_t chr;
 
 	for(uint32_t j = 0; j < font.GlyphHeight; ++j) {
-		uint8_t width = font.GlyphWidth[(int)ch];
+		uint8_t width = g_width;
 
 		for(uint32_t w = 0; w < font.GlyphBytesWidth; ++w) {
 			chr = font.GlyphBitmaps[(ch * font.GlyphHeight + j) * font.GlyphBytesWidth + w];
@@ -215,7 +229,7 @@ void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state) {
 		}
 	}
 
-	ST7567A.curr_x += font.GlyphWidth[(int)ch];
+	ST7567A.curr_x += g_width;
 
 //	return ch + font.FirstAsciiCode;
 }
@@ -223,5 +237,12 @@ void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state) {
 void st7567a_WriteString(const char *str, fontStyle_t font, ST7567A_PixelState_t state) {
 	while(*str) {
 		st7567a_WriteChar(*str++, font, state);
+	}
+}
+
+// fixed_width = 0 -> variable-width
+void st7567a_WriteString_FixedWidth(const char *str, fontStyle_t font, uint8_t fixed_width, ST7567A_PixelState_t state) {
+	while(*str) {
+		st7567a_WriteChar_FixedWidth(*str++, font, fixed_width, state);
 	}
 }

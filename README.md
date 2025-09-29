@@ -12,7 +12,7 @@ Right now the library supports 4-wire SPI only.
     - point
     - horintal line (fast)
     - vertical line (fast)
-- variable-width fonts
+- fixed-width or variable-width fonts
 - power-save procedure
 - example project
     - build with Makefile or STM32CubeIDE
