@@ -186,7 +186,7 @@ void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state) {
 
 	// check remaining space on the current line
 	if (ST7567A_WIDTH < (ST7567A.curr_x + font.GlyphWidth[(int)ch]) ||
-		ST7567A_HEIGHT < (ST7567A.curr_y + font.GlyphWidth[(int)ch])) {
+		ST7567A_HEIGHT < (ST7567A.curr_y + font.GlyphHeight)) {
 		// not enough space
 		return;
 	}
