@@ -59,8 +59,8 @@ Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c \
 Core/Src/system_stm32g4xx.c \
-../ST7567A/st7567a.c \
-../ST7567A/fontlibrary.c 
+../st7567a/st7567a.c \
+../st7567a/fontlibrary.c 
 
 # ASM sources
 ASM_SOURCES =  \
@@ -122,7 +122,7 @@ C_INCLUDES =  \
 -IDrivers/STM32G4xx_HAL_Driver/Inc/Legacy \
 -IDrivers/CMSIS/Device/ST/STM32G4xx/Include \
 -IDrivers/CMSIS/Include\
--I../ST7567A
+-I../st7567a
 
 
 # compile gcc flags

@@ -58,3 +58,8 @@ dkms.conf
 
 # STM32CubeIDE (Eclipse) cyclomatic complexity
 *.cyclo
+
+# STM32CubeIDE user settings
+example/STM32CubeIDE/Debug/
+example/STM32CubeIDE/.settings/
+example/STM32CubeIDE/*.launch
