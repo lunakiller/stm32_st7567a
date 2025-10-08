@@ -73,6 +73,7 @@ script_revision = '2025-06-02'
 # BytesHeight = 16
 # CropX = 0
 # CropY = 3
+# Spacing = -1
 # FixedWidth = 0  
 # 
 # [Font2]
@@ -149,6 +150,11 @@ class Config:
         self.crop_x       = cfg.getint(section, "CropX")
         self.crop_y       = cfg.getint(section, "CropY")
         
+        if cfg.has_option(section, "Spacing"):
+            self.spacing = cfg.getint(section, "Spacing")
+        else:
+            self.spacing = 0;
+
         if cfg.has_option(section, "FixedWidth"):
             self.fixed_width = cfg.getint(section, "FixedWidth")
         else:
@@ -196,7 +202,7 @@ def makeBitmapsTable(config, img, glyphs):
             glyph_found = glyphs[0]
             
         s += glyph_found.makeBitmapCode(img, config.bytes_width * 8, config.bytes_height, 
-                             config.crop_x, config.crop_y)
+                             config.crop_x, config.crop_y, config.spacing)
                     
     s += "};\n"
     
@@ -226,7 +232,7 @@ def makeWidthsTable(config, glyphs):
             s += "\n    "
         
         i = (i + 1) % 8 
-        s += glyph_found.makeWidthCode()                            
+        s += glyph_found.makeWidthCode(config.spacing)
             
     s += "\n};\n"
     return s
@@ -336,8 +342,8 @@ class Glyph:
                 s += pixel
             print(s)
         
-    def makeBitmapCode(self, img, width, height, crop_x = 0, crop_y = 0):
-        s = '\n    // ASCII: %d, char width: %d' % (self.id, self.xadvance)
+    def makeBitmapCode(self, img, width, height, crop_x = 0, crop_y = 0, spacing = 0):
+        s = '\n    // ASCII: %d, char width: %d' % (self.id, self.xadvance + spacing)
         for y in range(0, height):
             comment = ""
             bytestring = ""
@@ -355,7 +361,7 @@ class Glyph:
                     comment += 'O'
                     byte |= mask
                 else:
-                    if x >= self.xadvance:
+                    if x >= self.xadvance + spacing:
                         comment += '.'
                     else:
                         comment += '-'
@@ -374,8 +380,8 @@ class Glyph:
             
         return s + "\n"
         
-    def makeWidthCode(self):
-        return '%2d, ' % (self.xadvance)
+    def makeWidthCode(self, spacing = 0):
+        return '%2d, ' % (self.xadvance + spacing)
         
 if __name__ == "__main__":    
     print("BMFont to C source converter by Lars Ole Pontoppidan, %s\n" % script_revision)
