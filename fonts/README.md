@@ -27,7 +27,21 @@
         BytesHeight = 18
         CropX = 0
         CropY = 2
+
+        [Font2]
+        InputFile = Dogica_Pixel_8.fnt
+        CFontName = Dogica_8
+        FirstAscii = 32
+        LastAscii = 126
+        BytesWidth = 1
+        BytesHeight = 8
+        CropX = 1
+        CropY = 0
+        Spacing = -1
         ```
+    - optional parameters:
+        - `Spacing` - adjust spacing (char width)
+        - `FixedWidth` - generate fixed-width font
     - add more fonts by adding sections named Font1, Font2, Font3, ...
 9) run the `bmfont2c.py` script to generate the header and source file
 10) check the output font library and repeat steps 8. and 9. until the result matches your expectations

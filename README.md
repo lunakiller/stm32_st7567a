@@ -25,6 +25,7 @@ Right now the library supports 4-wire SPI only.
 
 ## Fonts
 The library supports variable-width fonts. Two free pixel fonts are included:
+- [Dogica](https://www.dafont.com/dogica.font) (8px)
 - [RetroVille NC](https://www.dafont.com/retroville-nc.font) (9px)
 - [videotype](https://www.dafont.com/videotype.font) (18px)
 

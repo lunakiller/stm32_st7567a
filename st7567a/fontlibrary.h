@@ -21,6 +21,7 @@ typedef struct
 
 
 extern fontStyle_t FontStyle_videotype_18;
+extern fontStyle_t FontStyle_Dogica_8;
 extern fontStyle_t FontStyle_RetroVilleNC_9;
 
 #endif /* FONTLIBRARY_H_ */
