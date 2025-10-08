@@ -246,3 +246,35 @@ void st7567a_WriteString_FixedWidth(const char *str, fontStyle_t font, uint8_t f
 		st7567a_WriteChar_FixedWidth(*str++, font, fixed_width, state);
 	}
 }
+
+// draw XBitMap (.xbm)
+void st7567a_DrawXBitmap(uint8_t x, uint8_t y, const unsigned char* bitmap, uint8_t w, uint8_t h, ST7567A_PixelState_t state) {
+	uint8_t byteWidth = (w + 7) / 8;		// pad each row to full bytes
+
+	for (uint8_t j = 0; j < h; j++) {
+		uint8_t yPos = y + j;
+		if (yPos >= ST7567A_HEIGHT) {			// check boundaries
+			continue;
+		}
+
+		for (uint8_t i = 0; i < w; i++) {
+			uint8_t xPos = x + i;
+			if (xPos >= ST7567A_WIDTH) {		// check boundaries
+				continue;
+			}
+
+			uint8_t byte = bitmap[j * byteWidth + (i / 8)];
+			// XBM: 0 = ON, 1 = OFF
+			if ((byte & (1 << (i % 8))) == 0) {
+				// calculate buffer index for (xPos, yPos)
+				uint16_t index = xPos + (yPos / 8) * ST7567A_WIDTH;
+
+				if (state == PIXEL_ON) {
+						ST7567A_buffer[index] |= (1 << (yPos % 8));
+				} else {
+						ST7567A_buffer[index] &= ~(1 << (yPos % 8));
+				}
+			}
+		}
+	}
+}

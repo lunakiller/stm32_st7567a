@@ -52,6 +52,7 @@ void st7567a_Display(void);
 void st7567a_DrawPixel(uint8_t x, uint8_t y, ST7567A_PixelState_t state);
 void st7567a_DrawVLine(uint8_t x, ST7567A_PixelState_t state);
 void st7567a_DrawHLine(uint8_t y, ST7567A_PixelState_t state);
+void st7567a_DrawXBitmap(uint8_t x, uint8_t y, const unsigned char* bitmap, uint8_t w, uint8_t h, ST7567A_PixelState_t state);
 
 void st7567a_SetCursor(uint8_t x, uint8_t y);
 void st7567a_WriteChar(char ch, fontStyle_t font, ST7567A_PixelState_t state);
